@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="line">
+    <stroke
+        android:width="1dip"
+        android:color="@color/primaryDark"/>
+
+</shape><!-- From: file:/Users/Captain/Documents/udacity/android/pop-movie-stage-2/app/src/main/res/drawable/border_dark_gray.xml -->

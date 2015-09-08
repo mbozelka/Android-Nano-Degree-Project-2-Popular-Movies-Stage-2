@@ -1,0 +1,19 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center_vertical"
+    tools:context="com.mattbozelka.popularmovies.MovieDetailFragment">
+
+    <ImageView
+        android:id="@+id/details_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/intro_star"
+        android:scaleType="centerInside"
+        />
+
+</FrameLayout>
+<!-- From: file:/Users/Captain/Documents/udacity/android/pop-movie-stage-2/app/src/main/res/layout/fragment_movie_detail_placeholder.xml -->

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mattbozelka.popularmovies.MovieListFragment">
+
+    <GridView
+        android:id="@+id/main_movie_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:verticalSpacing="0dp"
+        android:horizontalSpacing="0dp"
+        android:stretchMode="columnWidth"
+        android:numColumns="4"/>
+
+</FrameLayout>
+<!-- From: file:/Users/Captain/Documents/udacity/android/pop-movie-stage-2/app/src/main/res/layout/fragment_movie_list.xml -->
