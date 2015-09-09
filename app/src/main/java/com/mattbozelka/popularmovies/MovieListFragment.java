@@ -112,7 +112,29 @@ public class MovieListFragment extends Fragment{
     @Override
     public void onStart() {
         super.onStart();
-        getMovies();
+
+        // get preferences to check sort order
+        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String checkSortOrder = prefs.getString(getString(R.string.display_preferences_sort_order_key),
+                getString(R.string.display_preferences_sort_default_value));
+
+
+        boolean sortOrderChange = !checkSortOrder.equals(sortOrder);
+        sortOrder = checkSortOrder;
+
+        // if no movies or the sort order has changed fetch new movies
+        // if sort order is favorites it grabs favorites from DB
+        // to ensure it is always up to date
+        if(movies.size() == 0 || sortOrderChange || sortOrder.equals("favorites")){
+            getMovies();
+        }else{
+            // else load what's already in memory
+            mMoviePosterAdapter.clear();
+            for(Movie movie : movies) {
+                mMoviePosterAdapter.add(movie.getPoster());
+            }
+        }
+
     }
 
 
@@ -131,18 +153,9 @@ public class MovieListFragment extends Fragment{
     * */
     private void getMovies() {
 
-        // get preferences to check sort order
-        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String checkSortOrder = prefs.getString(getString(R.string.display_preferences_sort_order_key),
-                getString(R.string.display_preferences_sort_default_value));
-
-
-        boolean sortOrderChange = !checkSortOrder.equals(sortOrder);
-        sortOrder = checkSortOrder;
-
-        // fetch movies
+        // fetch the movies from the API, or it will get favorites from the DB
         FetchMoviesTask fetchMoviesTask = new FetchMoviesTask(getActivity(),
-                movies, mMoviePosterAdapter, sortOrder, sortOrderChange);
+                movies, mMoviePosterAdapter, sortOrder);
 
         fetchMoviesTask.execute();
 

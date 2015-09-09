@@ -46,15 +46,13 @@ public class FetchMoviesTask extends AsyncTask<String, Void, ArrayList<Movie>> {
     private ImageAdapter mMoviePosterAdapter;
     private ArrayList<Movie> movies;
     private String sortBy;
-    private boolean sortByChanged;
 
     public FetchMoviesTask(Context context, ArrayList<Movie> movies,
-                           ImageAdapter mMoviePosterAdapter, String sortBy, boolean sortByChanged){
+                           ImageAdapter mMoviePosterAdapter, String sortBy){
         this.mContext = context;
         this.movies = movies;
         this.mMoviePosterAdapter = mMoviePosterAdapter;
         this.sortBy = sortBy;
-        this.sortByChanged = sortByChanged;
     }
 
     @Override
@@ -63,12 +61,6 @@ public class FetchMoviesTask extends AsyncTask<String, Void, ArrayList<Movie>> {
         // get favorites from the database
         if(sortBy.equals("favorites")){
             getFavorites();
-            return movies;
-        }
-
-        // check if the sort order has changed, if so grab more data.
-        // if not return the current movies set.
-        if(movies.size() > 0 && !sortByChanged){
             return movies;
         }
 
@@ -213,8 +205,10 @@ public class FetchMoviesTask extends AsyncTask<String, Void, ArrayList<Movie>> {
 
             cursor = resolver.query(uri, null, null, null, null);
 
+            // clear movies
+            movies.clear();
+
             if (cursor.moveToFirst()){
-                movies.clear();
                 do {
                     Movie movie = new Movie(cursor.getInt(1), cursor.getString(3),
                             cursor.getString(4), cursor.getString(5), cursor.getString(6),
